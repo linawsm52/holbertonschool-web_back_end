@@ -35,7 +35,6 @@ class Server:
         """
         if self.__indexed_dataset is None:
             dataset = self.dataset()
-            truncated_dataset = dataset[:1000]
             self.__indexed_dataset = {
                 i: dataset[i] for i in range(len(dataset))
             }
@@ -50,13 +49,13 @@ class Server:
 
         indexed_data = self.indexed_dataset()
         data_len = len(indexed_data)
-        
+
         assert index < data_len
 
         data = []
         current_index = index
         count = 0
-        
+
         while count < page_size and current_index < data_len:
             item = indexed_data.get(current_index)
             if item:

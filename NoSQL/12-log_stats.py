@@ -8,18 +8,18 @@ def log_stats():
     client = MongoClient('mongodb://127.0.0.1:27017')
     collection = client.logs.nginx
 
-    # Total logs count
-    total_logs = collection.count_documents({})
-    print(f"{total_logs} logs")
+    # Print total logs
+    total = collection.count_documents({})
+    print(f"{total} logs")
 
-    # Methods stats
+    # Print methods stats
     print("Methods:")
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     for method in methods:
         count = collection.count_documents({"method": method})
         print(f"\tmethod {method}: {count}")
 
-    # Status check count
+    # Print status check
     status_check = collection.count_documents(
         {"method": "GET", "path": "/status"}
     )
@@ -28,3 +28,4 @@ def log_stats():
 
 if __name__ == "__main__":
     log_stats()
+    
